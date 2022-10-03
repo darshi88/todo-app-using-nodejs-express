@@ -1,9 +1,9 @@
 const express=require("express");
 const router = express.Router()
-const Todo =require('./model/Todo.model')
+const Todo =require('../model/todo.model')
 
 
-todoRoutes.route('/').get(function(req, res) {
+router.route('/').get(function(req, res) {
     Todo.find(function(err, todos) {
         if (err) {
             console.log(err);
@@ -13,14 +13,14 @@ todoRoutes.route('/').get(function(req, res) {
     });
 });
 
-todoRoutes.route('/:id').get(function(req, res) {
+router.route('/:id').get(function(req, res) {
     let id = req.params.id;
     Todo.findById(id, function(err, todo) {
         res.json(todo);
     });
 });
 
-todoRoutes.route('/update/:id').post(function(req, res) {
+router.route('/update/:id').post(function(req, res) {
     Todo.findById(req.params.id, function(err, todo) {
         if (!todo)
             res.status(404).send("data is not found");
@@ -39,7 +39,7 @@ todoRoutes.route('/update/:id').post(function(req, res) {
     });
 });
 
-todoRoutes.route('/add').post(function(req, res) {
+router.route('/add').post(function(req, res) {
     let todo = new Todo(req.body);
     todo.save().then(todo => {
             res.status(200).json({'todo': 'todo added successfully'});

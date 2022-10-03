@@ -1,11 +1,11 @@
 const express=require("express");
 const mongoose=require("mongoose");
 const bodyParser=require("body-parser");
-const todoRouter = require('../routes/Todo')
-const Todo =require('./model/Todo.model')
-
-app.use('./Todo',todoRouter)
+const router = require('./routes/todo')
+const Todo =require('./model/todo.model')
 const app= express();
+app.use('./todo',router)
+
 // app.set("view engine" ,"ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
